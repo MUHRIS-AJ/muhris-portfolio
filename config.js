@@ -3,15 +3,15 @@ import { HiCode, HiCube, HiDatabase, HiMail, HiBriefcase, HiAcademicCap, HiBadge
 
 export const config = {
     developer: {
-        name: "ABOOL JAYA MUHRIS",
+        name: "Muhrees Abool Jayah",
         profileImage: "/profile-main.jpg",
-        title: "Aspiring Data Scientist & Data Analyst | Excel • SQL • Python | BICT (Hons), EUSL | vibe coder | Microsoft Student Ambassador Applicant",
-        degrees: "Bachelor's degree, Information Communication and Technology (EUSL)"
+        title: "Data Analyst | Machine Learning & Data Visualization | Python • SQL • Power BI",
+        degrees: "BSc. Honours Degree in Computing & Information Systems"
     },
     social: {
         github: "MUHRIS-AJ",
-        linkedin: "abool-jaya-muhris-975220350",
-        linkedinUrl: "https://www.linkedin.com/in/abool-jaya-muhris-975220350/",
+        linkedin: "muhrees-abool-jayah-975220350",
+        linkedinUrl: "https://www.linkedin.com/in/muhrees-abool-jayah-975220350/",
         instagram: "hum_x_nur",
         instagramUrl: "https://www.instagram.com/hum_x_nur/",
         whatsapp: "+94 77 5551 712",
@@ -195,11 +195,11 @@ export const config = {
     ],
     about: {
         title: "Who Am I?",
-        description: "I am a BICT (Hons) undergraduate at Eastern University of Sri Lanka with a strong interest in data science, data analytics, and technology-driven problem solving.",
+        description: "Data Analyst skilled in Machine Learning and Data Visualization with hands-on experience in building intelligent solutions. Currently working at NoviTech R&D Pvt Ltd.",
         fit: "How I Fit",
-        fitDescription: "I work with Excel, SQL, and Python to analyze data and derive meaningful insights, and I enjoy helping fellow students understand technical concepts in a simple and practical way.",
+        fitDescription: "I transform complex data into actionable insights through Python, SQL, Power BI, and Machine Learning. Passionate about making data-driven decisions accessible.",
         knowledge: "My Knowledge",
-        knowledgeDescription: "I am applying to become a Microsoft Student Ambassador to promote Microsoft technologies, support peer learning, and contribute to building a collaborative student tech community."
+        knowledgeDescription: "Expertise in data analysis, ML model development, statistical analysis, and dashboard creation using industry-standard tools and frameworks."
     },
     contactInfo: [
         {
@@ -211,8 +211,8 @@ export const config = {
         {
             icon: <FaLinkedin className="w-5 h-5" />,
             label: "LinkedIn",
-            value: "Abool Jaya Muhris",
-            link: "https://www.linkedin.com/in/abool-jaya-muhris-975220350/"
+            value: "Muhrees Abool Jayah",
+            link: "https://www.linkedin.com/in/muhrees-abool-jayah-975220350/"
         },
         {
             icon: <FaInstagram className="w-5 h-5" />,

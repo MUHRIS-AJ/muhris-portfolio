@@ -40,9 +40,9 @@ const HeroSection = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-[1.1]"
           >
-            REDEFINING THE <br />
+            DATA <br />
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-400 animate-gradient-x">
-              FUTURE OF DIGITAL
+              ANALYST
             </span>
           </motion.h1>
 
@@ -53,8 +53,7 @@ const HeroSection = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed"
           >
-            Building secure, scalable, and cutting-edge web solutions that
-            innovate the digital economy of the future.
+            Transforming complex data into actionable insights through Machine Learning, Data Visualization, and Analytics.
           </motion.p>
 
           {/* Buttons */}
@@ -100,16 +99,16 @@ const HeroSection = () => {
               className="bg-black/40 border border-white/10 p-6 rounded-2xl backdrop-blur-xl hover:border-purple-500/50 transition-all group"
             >
               <div className="flex items-center justify-between mb-4">
-                <span className="text-gray-400 text-sm font-medium">Experience</span>
+                <span className="text-gray-400 text-sm font-medium">Followers</span>
                 <HiChip className="w-5 h-5 text-purple-400" />
               </div>
               <div className="text-3xl font-bold text-white mb-1">
-                2+ <span className="text-sm font-normal text-gray-500">Years</span>
+                1,100+ <span className="text-sm font-normal text-gray-500">LinkedIn</span>
               </div>
               <div className="h-1 w-full bg-gray-800 rounded-full mt-2 overflow-hidden">
                 <motion.div
                   initial={{ width: 0 }}
-                  animate={{ width: '65%' }}
+                  animate={{ width: '75%' }}
                   transition={{ duration: 1, delay: 1 }}
                   className="h-full bg-gradient-to-r from-purple-500 to-indigo-500"
                 />
@@ -126,12 +125,12 @@ const HeroSection = () => {
                 <HiCode className="w-5 h-5 text-pink-400" />
               </div>
               <div className="text-3xl font-bold text-white mb-1">
-                10+ <span className="text-sm font-normal text-gray-500">Completed</span>
+                16 <span className="text-sm font-normal text-gray-500">GitHub</span>
               </div>
               <div className="h-1 w-full bg-gray-800 rounded-full mt-2 overflow-hidden">
                 <motion.div
                   initial={{ width: 0 }}
-                  animate={{ width: '85%' }}
+                  animate={{ width: '90%' }}
                   transition={{ duration: 1, delay: 1.2 }}
                   className="h-full bg-gradient-to-r from-pink-500 to-rose-500"
                 />
@@ -144,11 +143,11 @@ const HeroSection = () => {
               className="bg-black/40 border border-white/10 p-6 rounded-2xl backdrop-blur-xl hover:border-cyan-500/50 transition-all group"
             >
               <div className="flex items-center justify-between mb-4">
-                <span className="text-gray-400 text-sm font-medium">Innovation</span>
+                <span className="text-gray-400 text-sm font-medium">Connections</span>
                 <HiSparkles className="w-5 h-5 text-cyan-400" />
               </div>
               <div className="text-3xl font-bold text-white mb-1">
-                100% <span className="text-sm font-normal text-gray-500">Commitment</span>
+                500+ <span className="text-sm font-normal text-gray-500">LinkedIn</span>
               </div>
               <div className="h-1 w-full bg-gray-800 rounded-full mt-2 overflow-hidden">
                 <motion.div
