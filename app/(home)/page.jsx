@@ -1,4 +1,4 @@
-import NeoPortfolio from "@/components/NeoPortfolio";
+import CinematicPortfolio from "@/components/CinematicPortfolio";
 import { getGitHubData } from "@/lib/githubPortfolio";
 export const revalidate = 900;
 export const metadata = {
@@ -7,5 +7,5 @@ export const metadata = {
 };
 export default async function Home() {
   const github = await getGitHubData();
-  return <NeoPortfolio github={github} />;
+  return <CinematicPortfolio github={github} />;
 }
