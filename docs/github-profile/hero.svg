@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-label="A.J. MUHRIS, building real-world AI systems">
+  <defs>
+    <linearGradient id="back" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#0c101d"/><stop offset="0.55" stop-color="#1a1733"/><stop offset="1" stop-color="#351744"/></linearGradient>
+    <linearGradient id="neon" x1="0" x2="1"><stop stop-color="#ffa788"/><stop offset="0.55" stop-color="#ff87c0"/><stop offset="1" stop-color="#bd8dff"/></linearGradient>
+    <radialGradient id="glow"><stop stop-color="#c749cb" stop-opacity=".6"/><stop offset="1" stop-color="#c749cb" stop-opacity="0"/></radialGradient>
+    <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse"><path d="M 44 0 L 0 0 0 44" fill="none" stroke="#e8b5f2" stroke-opacity=".065"/></pattern>
+    <filter id="soft"><feGaussianBlur stdDeviation="32"/></filter>
+  </defs>
+  <rect width="1200" height="360" fill="url(#back)"/><rect width="1200" height="360" fill="url(#grid)"/>
+  <circle cx="1010" cy="100" r="260" fill="url(#glow)" filter="url(#soft)"/>
+  <circle cx="1025" cy="182" r="122" stroke="#df9ad7" stroke-opacity=".4" fill="none" stroke-width="1.5"/>
+  <circle cx="1025" cy="182" r="156" stroke="#df9ad7" stroke-opacity=".22" fill="none"/>
+  <path d="M 810 20 C 955 30 935 292 1120 335" stroke="url(#neon)" stroke-width="2" fill="none" opacity=".55"/>
+  <path d="M 895 0 C 980 95 1125 83 1200 196" stroke="#a67fff" stroke-opacity=".35" stroke-width="2" fill="none"/>
+  <g stroke="#ffd5f0" stroke-width="1.4" fill="none" stroke-opacity=".5"><path d="M1004 137l20-22 24 18-9 35 20 15-24 28 4 28-42 9-24-30-24-12 20-30z"/><circle cx="1004" cy="137" r="5"/><circle cx="1048" cy="133" r="5"/><circle cx="1059" cy="183" r="5"/><circle cx="997" cy="248" r="5"/></g>
+  <rect x="60" y="42" width="185" height="25" rx="12.5" fill="#ffffff" fill-opacity=".09" stroke="#ffb7da" stroke-opacity=".5"/>
+  <circle cx="75" cy="54.5" r="4" fill="#ff9dce"/><text x="88" y="59" font-family="Arial,sans-serif" font-size="10" fill="#f9c2df" letter-spacing="1.4" font-weight="bold">AI SYSTEMS / R&amp;D</text>
+  <text x="56" y="162" font-family="Impact,'Arial Black',sans-serif" font-size="98" font-weight="900" letter-spacing="-1" fill="#ffffff">A.J. MUHRIS</text>
+  <rect x="60" y="183" width="445" height="5" rx="2" fill="url(#neon)"/>
+  <text x="60" y="235" font-family="Arial,sans-serif" font-size="22" font-weight="bold" fill="#ffbad9" letter-spacing="2">BUILD BEYOND THE ORDINARY.</text>
+  <text x="60" y="282" font-family="Arial,sans-serif" font-size="17" fill="#c5bcd0">Data analytics  /  Applied AI  /  MCP research  /  Web engineering</text>
+  <text x="60" y="326" font-family="Arial,sans-serif" font-size="12" fill="#aea1c5" letter-spacing="1.6">GITHUB.COM/MUHRIS-AJ</text>
+</svg>
