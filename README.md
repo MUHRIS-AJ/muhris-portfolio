@@ -1,97 +1,50 @@
-# Portfolio - Abool Jaya Muhris
+# A.J. Muhris — AI Engineering Portfolio
 
-Welcome to my personal portfolio repository! This project showcases my journey as a Data Scientist, AI Engineer, and Full Stack Developer. It features a modern, interactive accessible web interface built with the latest web technologies.
+A cinematic, accessible Next.js portfolio showcasing actual public GitHub work, learning records, and an evidence-first roadmap for MCP and multi-agent AI systems.
 
-## 🚀 Features
+## What this branch delivers
+- New homepage inspired by neon coastal cinematography, with original gradients, glass panels and responsive layouts. No copied game assets or branding.
+- Existing personal portrait loaded from public/profile-main.jpg.
+- GitHub and LinkedIn links.
+- A curated showcase plus recent public repository discovery through GitHub's public REST API.
+- Server-side GitHub cache revalidation every 900 seconds (not instant webhook sync).
+- Six credentials **listed in the previous portfolio**, clearly marked as issuer verification pending.
+- An AI engineering workflow and research/agent backlog.
+- A ResearchGuard read-only MCP prototype using free Crossref paper metadata.
+- GitHub Actions checks for Next.js production build and Python unit tests.
 
-- **Interactive UI**: Utilizing **Framer Motion** for smooth animations and transitions.
-- **3D Elements**: Integrated **Three.js** and **React Three Fiber** for immersive 3D experiences.
-- **Responsive Design**: Fully responsive layout built with **Tailwind CSS**.
-- **Dark/Light Mode**: Seamless theme switching integration.
-- **Project Showcase**: A dedicated section to display my data science and software engineering projects.
-- **Contact Integration**: Direct links to my social profiles including GitHub, LinkedIn, Instagram, and WhatsApp.
+## Run the website
+1. Install Node.js 20 and Git.
+2. Clone: git clone https://github.com/MUHRIS-AJ/muhris-portfolio.git
+3. Enter: cd muhris-portfolio
+4. Switch to this branch: git switch feat/ai-control-room-2026
+5. Install: npm ci
+6. Start: npm run dev
+7. Visit http://localhost:3000
 
-## 🛠️ Tech Stack
+To test the production build, run npm run build.
 
-- **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
-- **Library**: [React 18](https://reactjs.org/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **Animations**: [Framer Motion](https://www.framer.com/motion/) & [GSAP](https://greensock.com/gsap/)
-- **3D Graphics**: [Three.js](https://threejs.org/) & [React Three Fiber](https://docs.pmnd.rs/react-three-fiber)
-- **Icons**: [Lucide React](https://lucide.dev/) & [React Icons](https://react-icons.github.io/react-icons/)
-- **State Management**: React Hooks
-- **Form Handling**: React Hook Form
+## Live GitHub sync
+The server fetches public repositories for MUHRIS-AJ. It filters archived, forked and empty projects, then shows a curated subset and recently pushed repositories. The cached feed revalidates on the next supported server request after 900 seconds. A hosting service must support Next.js server-side caching and revalidation. If the API fails, verified names from the November 2026 repository audit appear as a fallback. Private repositories are never requested.
 
-## 📦 Getting Started
+## MCP tool prototype
+See labs/researchguard/README.md. It contains an actual MCPServer (official SDK v2), three read-only metadata tools, and offline unit tests. It does not yet contain autonomous LLM agents.
 
-Follow these steps to set up the project locally on your machine.
+## How I work with AI
+I use AI for research planning, architecture alternatives, coding assistance and test generation. I validate output with evidence and tests before presenting it as complete. See docs/AI_WORKFLOW.md and AGENTS.md.
 
-### Prerequisites
+## Project and repository governance
+- docs/PROJECT_AUDIT.md: which existing repositories should be featured and which require manual review.
+- docs/AGENT_PROJECTS.md: prioritized global problem-solving projects, APIs and MVP metrics.
+- AGENTS.md: multi-agent development roles, permissions and review gates.
 
-- [Node.js](https://nodejs.org/en/) (v18.17.0 or higher recommended)
-- [Git](https://git-scm.com/)
+No repositories were deleted, archived or made public as part of this redesign. New project repositories should be created after a tested MVP exists.
 
-### Installation
+## Credentials and professional profile
+GitHub: https://github.com/MUHRIS-AJ
+LinkedIn: https://www.linkedin.com/in/muhrees-abool-jayah-975220350/
 
-1.  **Clone the repository:**
+Listed credentials are sourced from the repository's previous configuration. They are not represented as issuer-verified badges without supporting credential links.
 
-    ```bash
-    git clone https://github.com/MUHRIS-AJ/portfolio.git
-    cd portfolio
-    ```
-
-2.  **Install dependencies:**
-
-    ```bash
-    npm install
-    # or
-    yarn install
-    # or
-    pnpm install
-    ```
-
-3.  **Environment Setup:**
-
-    Create a `.env.local` file in the root directory and add any necessary environment variables. You can refer to `.env.example` if available.
-
-    ```env
-    # Example .env.local
-    NEXT_PUBLIC_SITE_URL=http://localhost:3000
-    ```
-
-4.  **Run the development server:**
-
-    ```bash
-    npm run dev
-    ```
-
-    Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## 📜 Scripts
-
-In the project directory, you can run:
-
-- `npm run dev`: Runs the app in the development mode.
-- `npm run build`: Builds the app for production.
-- `npm start`: Starts the production server.
-- `npm run lint`: Runs the linter to check for code quality issues.
-- `npm run spotify-auth`: Runs the Spotify authentication script (if applicable).
-
-## 👤 Author
-
-**Abool Jaya Muhris**
-
-- **Portfolio**: [My Website](https://your-portfolio-url.com)
-- **GitHub**: [@MUHRIS-AJ](https://github.com/MUHRIS-AJ)
-- **LinkedIn**: [Abool Jaya Muhris](https://www.linkedin.com/in/abool-jaya-muhris-975220350/)
-- **Instagram**: [@hum_x_nur](https://www.instagram.com/hum_x_nur/)
-- **WhatsApp**: [+94 77 5551 712](https://wa.me/94775551712)
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgements
-
-- Thanks to all the open-source contributors and library authors used in this project.
-- Special thanks to [Novians](https://novians.com) for the internship opportunity in Data Analytics, ML, & AI.
+## Limitations
+Live hosting, domain setup, certificate verification, access to private LinkedIn certifications, automatic GitHub Actions deployment and any autonomous production AI agents still require additional setup or approval.
