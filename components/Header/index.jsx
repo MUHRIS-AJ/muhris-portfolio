@@ -1,96 +1,27 @@
 "use client";
-import { useTheme } from 'next-themes';
-import { HiSun, HiMoon } from 'react-icons/hi2';
-import React from 'react';
-import { motion } from 'framer-motion';
-import { useView } from '@/components/Providers/ViewProvider';
-import { cn } from '@/lib/utils';
-import Image from 'next/image';
-
-const Header = () => {
-    const { activeTab, setActiveTab } = useView();
-    const { theme, setTheme } = useTheme();
-    const [mounted, setMounted] = React.useState(false);
-
-    React.useEffect(() => {
-        setMounted(true);
-    }, []);
-
-    const tabs = [
-        { id: 'home', label: 'About' },
-        { id: 'projects', label: 'Projects' },
-        { id: 'skills', label: 'Skills' },
-        { id: 'certifications', label: 'Certifications' },
-        { id: 'experience', label: 'Experience' },
-        { id: 'education', label: 'Education' },
-        { id: 'contact', label: 'Contact' },
-    ];
-
-    const toggleTheme = () => {
-        setTheme(theme === 'dark' ? 'light' : 'dark');
-    };
-
-    return (
-        <motion.header
-            initial={{ y: -50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 md:px-8 py-4 pointer-events-none"
-        >
-            <div
-                className="flex items-center gap-3 group cursor-pointer pointer-events-auto shrink-0 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border border-white/60 dark:border-white/10 p-1.5 pr-4 rounded-full shadow-lg transition-all duration-300"
-                onClick={() => setActiveTab('home')}
-            >
-                <div className="w-8 h-8 rounded-full bg-white/50 dark:bg-white/20 overflow-hidden border border-white/80 dark:border-white/10 shadow-sm transition-transform duration-300 group-hover:scale-110">
-                    <Image
-                        src="/profile-main.jpg"
-                        alt="logo"
-                        width={32}
-                        height={32}
-                        className="object-cover"
-                    />
-                </div>
-                <span className="font-bold text-slate-900 dark:text-white tracking-tight text-sm md:text-base">
-                    MUHRIS <span className="text-blue-600 dark:text-blue-400">AJ</span>
-                </span>
-            </div>
-
-            <div className="fixed bottom-6 left-1/2 -translate-x-1/2 md:static md:translate-x-0 pointer-events-auto max-w-[95vw] md:max-w-none">
-                <div className="bg-white/60 dark:bg-slate-900/60 backdrop-blur-3xl border border-white/80 dark:border-white/10 rounded-full p-1.5 flex items-center gap-1 shadow-2xl shadow-blue-500/10 overflow-x-auto no-scrollbar scroll-smooth whitespace-nowrap">
-                    {tabs.map((tab) => {
-                        const isActive = activeTab === tab.id;
-                        return (
-                            <button
-                                key={tab.id}
-                                onClick={() => setActiveTab(tab.id)}
-                                className={cn(
-                                    "relative px-4 md:px-6 py-2 rounded-full text-[13px] md:text-sm font-semibold tracking-tight transition-all duration-300",
-                                    isActive ? "text-[#1E293B] dark:text-white" : "text-gray-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400"
-                                )}
-                            >
-                                {isActive && (
-                                    <motion.div
-                                        layoutId="nav-pill"
-                                        className="absolute inset-0 bg-white dark:bg-slate-800 shadow-md rounded-full"
-                                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                                    />
-                                )}
-                                <span className="relative z-10">{tab.label}</span>
-                            </button>
-                        );
-                    })}
-                </div>
-            </div>
-
-            <div className="flex items-center justify-center pointer-events-auto shrink-0">
-                <button
-                    onClick={toggleTheme}
-                    className="w-9 h-9 rounded-full bg-white/50 dark:bg-slate-900/50 border border-white/80 dark:border-white/20 flex items-center justify-center text-slate-600 dark:text-slate-300 shadow-sm transition-all duration-300 hover:scale-110 hover:bg-white dark:hover:bg-slate-800"
-                >
-                    {mounted && (theme === 'dark' ? <HiSun className="w-5 h-5" /> : <HiMoon className="w-5 h-5" />)}
-                </button>
-            </div>
-        </motion.header>
-    );
-};
-
-export default Header;
+import React, { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { Menu, X, Github, ArrowUpRight } from "lucide-react";
+const anchors = [
+  ["WORK","/#work"],["AI LAB","/#agents"],["CREDENTIALS","/#credentials"],["PROCESS","/#workflow"]
+];
+export default function Header() {
+  const [open,setOpen]=useState(false);
+  return <header className="fixed inset-x-0 top-0 z-50 px-4 pt-3 pointer-events-none">
+    <nav className="pointer-events-auto mx-auto max-w-[1310px] rounded-2xl border border-white/15 bg-[#090917]/80 px-5 py-3 shadow-2xl backdrop-blur-2xl flex items-center justify-between gap-3">
+      <Link href="/" className="flex items-center gap-3 text-white font-black tracking-widest text-xs" onClick={()=>setOpen(false)}>
+        <span className="h-9 w-9 overflow-hidden rounded-full border border-fuchsia-300/70 relative"><Image src="/profile-main.jpg" alt="" fill sizes="36px" className="object-cover"/></span>
+        A.J. <span className="text-pink-300 -ml-2">MUHRIS</span>
+      </Link>
+      <div className="hidden md:flex items-center gap-6">
+        {anchors.map(([title,url])=><Link key={url} href={url} className="text-[10px] tracking-[.16em] font-extrabold text-white/70 hover:text-pink-300 transition">{title}</Link>)}
+      </div>
+      <div className="flex items-center gap-3">
+        <a href="https://github.com/MUHRIS-AJ" target="_blank" rel="noreferrer" className="hidden sm:flex items-center gap-2 text-xs font-bold text-white/90 border border-white/20 rounded-xl px-3 py-2 hover:border-pink-400"><Github size={15}/> GITHUB <ArrowUpRight size={12}/></a>
+        <button type="button" className="md:hidden text-white" onClick={()=>setOpen(v=>!v)} aria-label={open?"Close navigation":"Open navigation"} aria-expanded={open}>{open?<X size={22}/>:<Menu size={22}/>}</button>
+      </div>
+    </nav>
+    {open&&<div className="pointer-events-auto mx-auto max-w-[1310px] mt-1 bg-[#10101c]/95 border border-white/10 rounded-xl p-4 backdrop-blur-xl flex flex-col gap-4">{anchors.map(([title,url])=><Link key={url} href={url} className="text-white/90 text-xs font-bold" onClick={()=>setOpen(false)}>{title}</Link>)}</div>}
+  </header>;
+}
