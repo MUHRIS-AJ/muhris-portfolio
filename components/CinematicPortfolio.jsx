@@ -26,14 +26,14 @@ const filters = [
 ];
 
 const research = [
-  { name: "RESEARCHGUARD", tag: "CITATION VERIFICATION", description: "Crossref-backed research metadata checks with source-linked DOI shortlists.", stack: "Crossref · FastMCP · Python", url: "https://github.com/MUHRIS-AJ/ResearchGuard", phase: "LOCAL MVP" },
-  { name: "TENDERPILOT", tag: "PUBLIC PROCUREMENT", description: "Find EU public tender notices. Business eligibility still requires human review.", stack: "EU TED · FastMCP", url: "https://github.com/MUHRIS-AJ/TenderPilot-ZeroWaste", phase: "LOCAL MVP" },
-  { name: "ZEROWASTE", tag: "FOOD RESCUE DISCOVERY", description: "Discover mapped potential food-bank and community leads; partner consent is not verified.", stack: "OpenStreetMap · Overpass", url: "https://github.com/MUHRIS-AJ/TenderPilot-ZeroWaste", phase: "LOCAL MVP" },
-  { name: "EARTHWATCH", tag: "EVENT INTELLIGENCE", description: "Read NASA and USGS natural-event reports. Not an official alert or forecasting tool.", stack: "NASA EONET · USGS · FastMCP", url: "https://github.com/MUHRIS-AJ/EarthWatch", phase: "LOCAL MVP" },
-  { name: "GRANTSCOUT", tag: "FUNDING DISCOVERY", description: "Search US Grants.gov opportunities and surface original agency information.", stack: "Grants.gov · Python · MCP", url: "https://github.com/MUHRIS-AJ/GrantScout-AccessMap", phase: "LOCAL MVP" },
-  { name: "ACCESSMAP", tag: "ACCESSIBILITY DATA", description: "Inspect crowdsourced OSM wheelchair tags; on-site accessibility remains unverified.", stack: "OpenStreetMap · Overpass", url: "https://github.com/MUHRIS-AJ/GrantScout-AccessMap", phase: "LOCAL MVP" },
-  { name: "RECALLRADAR", tag: "PRODUCT SAFETY DATA", description: "Find public CPSC consumer product recall records and their official references.", stack: "CPSC · FastMCP", url: "https://github.com/MUHRIS-AJ/RecallRadar-TradeBridge", phase: "LOCAL MVP" },
-  { name: "TRADEBRIDGE", tag: "ECONOMIC INDICATORS", description: "Compare World Bank export and GDP indicators without speculative market forecasts.", stack: "World Bank · Python", url: "https://github.com/MUHRIS-AJ/RecallRadar-TradeBridge", phase: "LOCAL MVP" }
+  { name: "RESEARCHGUARD", tag: "CITATION VERIFICATION", description: "Crossref-backed research metadata checks with source-linked DOI shortlists.", stack: "Crossref · FastMCP · Python", demo: "https://muhris-researchguard.vercel.app", url: "https://github.com/MUHRIS-AJ/ResearchGuard", phase: "HOSTED MVP" },
+  { name: "TENDERPILOT", tag: "PUBLIC PROCUREMENT", description: "Find EU public tender notices. Business eligibility still requires human review.", stack: "EU TED · FastMCP", demo: "https://muhris-tenderpilot-zerowaste.vercel.app", url: "https://github.com/MUHRIS-AJ/TenderPilot-ZeroWaste", phase: "HOSTED MVP" },
+  { name: "ZEROWASTE", tag: "FOOD RESCUE DISCOVERY", description: "Discover mapped potential food-bank and community leads; partner consent is not verified.", stack: "OpenStreetMap · Overpass", demo: "https://muhris-tenderpilot-zerowaste.vercel.app", url: "https://github.com/MUHRIS-AJ/TenderPilot-ZeroWaste", phase: "HOSTED MVP" },
+  { name: "EARTHWATCH", tag: "EVENT INTELLIGENCE", description: "Read NASA and USGS natural-event reports. Not an official alert or forecasting tool.", stack: "NASA EONET · USGS · FastMCP", demo: "https://muhris-earthwatch.vercel.app", url: "https://github.com/MUHRIS-AJ/EarthWatch", phase: "HOSTED MVP" },
+  { name: "GRANTSCOUT", tag: "FUNDING DISCOVERY", description: "Search US Grants.gov opportunities and surface original agency information.", stack: "Grants.gov · Python · MCP", demo: "https://muhris-grantscout-accessmap.vercel.app", url: "https://github.com/MUHRIS-AJ/GrantScout-AccessMap", phase: "HOSTED MVP" },
+  { name: "ACCESSMAP", tag: "ACCESSIBILITY DATA", description: "Inspect crowdsourced OSM wheelchair tags; on-site accessibility remains unverified.", stack: "OpenStreetMap · Overpass", demo: "https://muhris-grantscout-accessmap.vercel.app", url: "https://github.com/MUHRIS-AJ/GrantScout-AccessMap", phase: "HOSTED MVP" },
+  { name: "RECALLRADAR", tag: "PRODUCT SAFETY DATA", description: "Find public CPSC consumer product recall records and their official references.", stack: "CPSC · FastMCP", demo: "https://muhris-recallradar-tradebridge.vercel.app", url: "https://github.com/MUHRIS-AJ/RecallRadar-TradeBridge", phase: "HOSTED MVP" },
+  { name: "TRADEBRIDGE", tag: "ECONOMIC INDICATORS", description: "Compare World Bank export and GDP indicators without speculative market forecasts.", stack: "World Bank · Python", demo: "https://muhris-recallradar-tradebridge.vercel.app", url: "https://github.com/MUHRIS-AJ/RecallRadar-TradeBridge", phase: "HOSTED MVP" }
 ]
 
 const certificates = [
@@ -197,12 +197,12 @@ export default function CinematicPortfolio({ github }) {
       </SceneReveal>
 
       <SceneReveal as="section" className={styles.section} id="agents" disabled={noMotion}>
-        <SectionTitle kicker="02 / REAL-WORLD PROBLEM SOLVING" title="AGENT" accent="LAB." description="Eight source-grounded, locally runnable prototypes now have public code and documented limits. The workflows are rule-based; autonomous LLM agents and hosted demos are not yet deployed." number="02—04"/>
+        <SectionTitle kicker="02 / REAL-WORLD PROBLEM SOLVING" title="AGENT" accent="LAB." description="Eight source-grounded workflows now have hosted dashboards and public source code. These are rule-based prototypes, not autonomous LLM agents; upstream data sources may be unavailable." number="02—04"/>
         <div className={styles.labGrid}>{research.map((project, index) =>
           <motion.div className={styles.labCard} key={project.name} whileHover={noMotion ? undefined : { y: -8, rotate: index % 2 ? 0.6 : -0.6, scale: 1.02 }} transition={{ type: "spring", stiffness: 195, damping: 20 }}>
             <div className={styles.labHeader}><span>{String(index+1).padStart(2,"0")} / {project.phase}</span><Orbit size={26}/></div>
             <div><small>{project.tag}</small><h3>{project.name}</h3><p>{project.description}</p></div>
-            <div className={styles.labBottom}><span>{project.stack}</span>{project.url ? <a href={project.url} target="_blank" rel="noreferrer" aria-label={"View source for "+project.name}><ArrowUpRight size={18}/></a> : null}</div>
+            <div className={styles.labBottom}><span>{project.stack}</span><div className={styles.labLinks}>{project.url ? <a href={project.url} target="_blank" rel="noreferrer" aria-label={"View source for "+project.name}>CODE <Github size={13}/></a> : null}{project.demo ? <a href={project.demo} target="_blank" rel="noreferrer" aria-label={"Open hosted dashboard for "+project.name}>DEMO <ArrowUpRight size={13}/></a> : null}</div></div>
           </motion.div>
         )}</div>
         <div className={styles.pipeline}><span>DISCOVER</span><i>↗</i><span>DESIGN</span><i>↗</i><span>MCP TOOLS</span><i>↗</i><span>VERIFY</span><i>↗</i><span>HUMAN REVIEW</span></div>
