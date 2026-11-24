@@ -26,11 +26,15 @@ const filters = [
 ];
 
 const research = [
-  { name: "RESEARCHGUARD", tag: "MCP PROTOTYPE", description: "Checking academic citations against source-linked DOI metadata.", stack: "Crossref · Python · MCP", url: "https://github.com/MUHRIS-AJ/muhris-portfolio/tree/main/labs/researchguard", phase: "PROTOTYPE" },
-  { name: "TENDERPILOT", tag: "PROCUREMENT INTELLIGENCE", description: "Discovering and evaluating opportunities for small suppliers.", stack: "Multi-agent · MCP · TED", phase: "PLANNED" },
-  { name: "ZEROWASTE", tag: "FOOD RESCUE", description: "Matching usable surplus with verified community partners.", stack: "OSM · Matching agents", phase: "PLANNED" },
-  { name: "EARTHWATCH", tag: "EVENT INTELLIGENCE", description: "Organizing public natural-event data with traceable sources.", stack: "NASA EONET · USGS", phase: "PLANNED" }
-];
+  { name: "RESEARCHGUARD", tag: "CITATION VERIFICATION", description: "Crossref-backed research metadata checks with source-linked DOI shortlists.", stack: "Crossref · FastMCP · Python", url: "https://github.com/MUHRIS-AJ/ResearchGuard", phase: "LOCAL MVP" },
+  { name: "TENDERPILOT", tag: "PUBLIC PROCUREMENT", description: "Find EU public tender notices. Business eligibility still requires human review.", stack: "EU TED · FastMCP", url: "https://github.com/MUHRIS-AJ/TenderPilot-ZeroWaste", phase: "LOCAL MVP" },
+  { name: "ZEROWASTE", tag: "FOOD RESCUE DISCOVERY", description: "Discover mapped potential food-bank and community leads; partner consent is not verified.", stack: "OpenStreetMap · Overpass", url: "https://github.com/MUHRIS-AJ/TenderPilot-ZeroWaste", phase: "LOCAL MVP" },
+  { name: "EARTHWATCH", tag: "EVENT INTELLIGENCE", description: "Read NASA and USGS natural-event reports. Not an official alert or forecasting tool.", stack: "NASA EONET · USGS · FastMCP", url: "https://github.com/MUHRIS-AJ/EarthWatch", phase: "LOCAL MVP" },
+  { name: "GRANTSCOUT", tag: "FUNDING DISCOVERY", description: "Search US Grants.gov opportunities and surface original agency information.", stack: "Grants.gov · Python · MCP", url: "https://github.com/MUHRIS-AJ/GrantScout-AccessMap", phase: "LOCAL MVP" },
+  { name: "ACCESSMAP", tag: "ACCESSIBILITY DATA", description: "Inspect crowdsourced OSM wheelchair tags; on-site accessibility remains unverified.", stack: "OpenStreetMap · Overpass", url: "https://github.com/MUHRIS-AJ/GrantScout-AccessMap", phase: "LOCAL MVP" },
+  { name: "RECALLRADAR", tag: "PRODUCT SAFETY DATA", description: "Find public CPSC consumer product recall records and their official references.", stack: "CPSC · FastMCP", url: "https://github.com/MUHRIS-AJ/RecallRadar-TradeBridge", phase: "LOCAL MVP" },
+  { name: "TRADEBRIDGE", tag: "ECONOMIC INDICATORS", description: "Compare World Bank export and GDP indicators without speculative market forecasts.", stack: "World Bank · Python", url: "https://github.com/MUHRIS-AJ/RecallRadar-TradeBridge", phase: "LOCAL MVP" }
+]
 
 const certificates = [
   { title: "Data Analytics", issuer: "NoviTech R&D", year: "2025" },
@@ -193,7 +197,7 @@ export default function CinematicPortfolio({ github }) {
       </SceneReveal>
 
       <SceneReveal as="section" className={styles.section} id="agents" disabled={noMotion}>
-        <SectionTitle kicker="02 / REAL-WORLD PROBLEM SOLVING" title="AGENT" accent="LAB." description="AI-agent ideas and prototypes organized by real problems. Project status is explicit: planned projects are not presented as complete." number="02—04"/>
+        <SectionTitle kicker="02 / REAL-WORLD PROBLEM SOLVING" title="AGENT" accent="LAB." description="Eight source-grounded, locally runnable prototypes now have public code and documented limits. The workflows are rule-based; autonomous LLM agents and hosted demos are not yet deployed." number="02—04"/>
         <div className={styles.labGrid}>{research.map((project, index) =>
           <motion.div className={styles.labCard} key={project.name} whileHover={noMotion ? undefined : { y: -8, rotate: index % 2 ? 0.6 : -0.6, scale: 1.02 }} transition={{ type: "spring", stiffness: 195, damping: 20 }}>
             <div className={styles.labHeader}><span>{String(index+1).padStart(2,"0")} / {project.phase}</span><Orbit size={26}/></div>
