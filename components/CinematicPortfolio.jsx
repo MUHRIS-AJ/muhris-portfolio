@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { SceneReveal, TiltProject, MagneticLink, MorphBackdrop, ScrollProgress } from "./MotionFX";
 import styles from "../app/(home)/cinematic.module.css";
+import { RuinsExperience, CredentialGallery, MembershipHall, extraCredentials } from "./RuinsExperience";
 
 const profile = {
   github: "https://github.com/MUHRIS-AJ",
@@ -100,9 +101,9 @@ export default function CinematicPortfolio({ github }) {
         <span><RadioTower size={13} /> MUHRIS / INTELLIGENCE STUDIO</span>
         <div className={styles.systemActions}>
           <span className={styles.status}><i /> SYSTEM ONLINE</span>
-          <button type="button" className={styles.motionButton} onClick={() => setAnimations(current => !current)} aria-label={noMotion ? "Enable motion effects" : "Reduce motion effects"} aria-pressed={!noMotion}>
+          <button type="button" className={styles.motionButton} onClick={() => setAnimations(current => !current)} disabled={Boolean(systemReduced)} aria-label={systemReduced ? "Motion reduced by system preference" : noMotion ? "Enable motion effects" : "Reduce motion effects"} aria-pressed={!noMotion}>
             {noMotion ? <Play size={13} /> : <Pause size={13} />}
-            {noMotion ? "ENABLE MOTION" : "REDUCE MOTION"}
+            {systemReduced ? "SYSTEM REDUCED MOTION" : noMotion ? "ENABLE MOTION" : "REDUCE MOTION"}
           </button>
         </div>
       </div>
@@ -112,7 +113,7 @@ export default function CinematicPortfolio({ github }) {
           initial={noMotion ? false : { opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}>
-          <Kicker>THE PORTFOLIO / VOL. 02</Kicker>
+          <Kicker>THE PORTFOLIO / VOL. 03</Kicker>
           <h1 className={styles.heroTitle}>
             <motion.span className={styles.titleWord} initial={noMotion ? false : { opacity: 0, y: 64, filter: "blur(8px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ duration: 0.95, delay: 0.04 }}>BUILD</motion.span>
             {" "}
@@ -129,7 +130,7 @@ export default function CinematicPortfolio({ github }) {
             <MagneticLink href={profile.linkedin} external className={styles.action} disabled={noMotion}><Linkedin size={17} /> LINKEDIN <ArrowUpRight size={13}/></MagneticLink>
           </div>
           <div className={styles.heroTech}><span>PYTHON</span><span>MACHINE LEARNING</span><span>NEXT.JS</span><span>MCP / AGENT R&D</span></div>
-          <a className={styles.scrollHint} href="#work"><MousePointer2 size={15}/> SCROLL TO EXPLORE <ArrowDownRight size={14}/></a>
+          <a className={styles.scrollHint} href="#citadel"><MousePointer2 size={15}/> SCROLL TO EXPLORE <ArrowDownRight size={14}/></a>
         </motion.div>
         <motion.div className={styles.portraitStage}
           initial={noMotion ? false : { opacity: 0, y: 32, rotate: -3, scale: 0.94 }}
@@ -155,9 +156,11 @@ export default function CinematicPortfolio({ github }) {
       <SceneReveal className={styles.metrics} disabled={noMotion}>
         <div><strong>{github.totalPublic ?? "—"}</strong><span>PUBLIC CODE REPOSITORIES</span></div>
         <div><strong>{github.featured.length}</strong><span>FEATURED PROJECTS</span></div>
-        <div><strong>06</strong><span>CREDENTIALS LISTED*</span></div>
+        <div><strong>{String(certificates.length + extraCredentials.length).padStart(2,"0")}</strong><span>LEARNING RECORDS LISTED*</span></div>
         <div><strong>LIVE</strong><span>GITHUB DATA FEED</span></div>
       </SceneReveal>
+
+      <RuinsExperience disabled={noMotion} />
 
       <SceneReveal as="section" className={styles.section} id="work" disabled={noMotion}>
         <SectionTitle kicker="01 / SHIPPED CODE" title="PROJECT" accent="ARCHIVE." description="Selected repositories with source code. Explore the published implementation, not just a concept image." number="01—04"/>
@@ -224,6 +227,9 @@ export default function CinematicPortfolio({ github }) {
           </div>
         </div>
       </SceneReveal>
+
+      <CredentialGallery original={certificates} disabled={noMotion} linkedin={profile.linkedin} />
+      <MembershipHall />
 
       <SceneReveal as="section" className={styles.section} id="workflow" disabled={noMotion}>
         <SectionTitle kicker="04 / THINK · BUILD · VERIFY" title="HUMAN +" accent="AI." description="I collaborate with AI for research, architecture, implementation and testing. I retain responsibility for reviewing the output and real-world results." number="04—04"/>
