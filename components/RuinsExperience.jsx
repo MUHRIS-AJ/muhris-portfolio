@@ -2,7 +2,7 @@
 import {useRef,useState} from "react";
 import Image from "next/image";
 import {motion, useScroll,useTransform,useSpring,AnimatePresence} from "framer-motion";
-import {Orbit,ArrowUpRight,Award,ChevronLeft,ChevronRight,Move,ZoomIn,ZoomOut,RotateCcw} from "lucide-react";
+import {Orbit,ArrowUpRight,Award,ChevronLeft,ChevronRight,ZoomIn,ZoomOut,RotateCcw,LockKeyhole} from "lucide-react";
 import styles from "./RuinsExperience.module.css";
 
 const looks=[
@@ -19,13 +19,67 @@ const cameras=[
  {name:"Dutch roll",scale:1.18,rotateZ:-7,rotateY:6,x:-10}
 ];
 export const extraCredentials=[
- {title:"Generate reports with AI research agents",issuer:"Microsoft Applied Skills",type:"Credential",evidence:"Award email found"},
- {title:"CCNA: Enterprise Networking, Security, and Automation",issuer:"Cisco Networking Academy",type:"Course completion",evidence:"Completion email found"},
- {title:"2025 Industrial Networking Essentials",issuer:"Cisco Networking Academy",type:"Course completion",evidence:"Completion email found"},
- {title:"Introduction to Critical Infrastructure Protection (ICIP)",issuer:"OPSWAT",type:"Digital badge",evidence:"Award email found · expires 29 Dec 2026"},
- {title:"Python Coder",issuer:"Kaggle",type:"Digital badge",evidence:"Award email found"},
- {title:"1 Million Prompters",issuer:"Dubai AI",type:"Training completion",evidence:"Completion email found"},
- {title:"International Observe the Moon Night 2026",issuer:"SEDS Sri Lanka",type:"Event certificate",evidence:"Certificate correspondence found"}
+  {
+    "title": "CCNA: Enterprise Networking, Security, and Automation",
+    "issuer": "Cisco Networking Academy",
+    "type": "Credly · Course badge",
+    "issuedDate": "18 Jan 2026",
+    "evidence": "Credly account screenshot and issuer completion email",
+    "art": "https://images.credly.com/images/0a6d331e-8abf-4272-a949-33f754569a76/CCNAENSA__1_.png",
+    "info": "https://www.credly.com/org/cisco/badge/ccna-enterprise-networking-security-and-automation"
+  },
+  {
+    "title": "Industrial Networking Essentials",
+    "issuer": "Cisco Networking Academy",
+    "type": "Credly · Course badge",
+    "issuedDate": "23 Jan 2026",
+    "evidence": "Credly account screenshot and issuer completion email",
+    "art": "https://images.credly.com/images/a5d515cf-f476-48b6-9d88-3210fc1fde11/blob",
+    "info": "https://www.credly.com/org/cisco/badge/industrial-networking-essentials"
+  },
+  {
+    "title": "Introduction to Critical Infrastructure Protection (ICIP)",
+    "issuer": "OPSWAT",
+    "type": "Credly · Certification",
+    "issuedDate": "29 Dec 2025",
+    "expires": "2026-12-29",
+    "evidence": "Credly screenshot, issuer email and public badge page",
+    "art": "https://images.credly.com/images/f9f3c533-9b5a-47eb-8a3e-5734663116c0/image.png",
+    "verify": "https://www.credly.com/badges/3a73eb1d-141a-4a06-a8b7-17db0992b6f7/public_url",
+    "info": "https://www.credly.com/org/opswat/badge/opswat-introduction-to-critical-infrastructure-protection-icip"
+  },
+  {
+    "title": "Generate reports with AI research agents",
+    "issuer": "Microsoft Applied Skills",
+    "type": "Credential",
+    "evidence": "Award email found",
+    "info": "https://learn.microsoft.com/credentials/applied-skills/generate-reports-with-ai-research-agents/"
+  },
+  {
+    "title": "Python Coder",
+    "issuer": "Kaggle",
+    "type": "Digital badge",
+    "evidence": "Award email found"
+  },
+  {
+    "title": "1 Million Prompters",
+    "issuer": "Dubai AI",
+    "type": "Training completion",
+    "evidence": "Completion email found"
+  },
+  {
+    "title": "International Observe the Moon Night 2026",
+    "issuer": "SEDS Sri Lanka",
+    "type": "Event certificate",
+    "evidence": "Certificate correspondence found"
+  },
+  {
+    "title": "Certificate for CISCO Certified Network Associate",
+    "issuer": "WinSYS Networks",
+    "type": "Training provider course certificate",
+    "issuedDate": "27 Dec 2025",
+    "evidence": "Original training provider certificate reviewed; not the Cisco professional certification exam."
+  }
 ];
 
 export function RuinsExperience({disabled=false}){
@@ -138,12 +192,33 @@ export function CredentialGallery({original=[],disabled=false,linkedin}){
  const [selected,setSelected]=useState(null);
  const items=[...extraCredentials,...original.map(c=>({...c,...archivedCredentialDetails[c.title],type:"Learning record",evidence:"Listed in original GitHub portfolio · issuer proof pending"}))];
  return <section id="achievement-gallery" className={styles.gallery} data-still={disabled?"true":"false"} aria-label="Hall of achievements">
-  <header className={styles.heading}><div><p className={styles.eyebrow}>ARCHIVE / {items.length} RECORDS</p><h2>HALL OF <em>ACHIEVEMENTS.</em></h2><p>Explore credentials and learning records. Public verification links are not yet available for these entries.</p></div><a className={styles.profileLink} href={linkedin} target="_blank" rel="noreferrer">LINKEDIN <ArrowUpRight size={15}/></a></header>
+  <header className={styles.heading}><div><p className={styles.eyebrow}>ARCHIVE / {items.length} RECORDS</p><h2>HALL OF <em>ACHIEVEMENTS.</em></h2><p>Official Credly badge artwork, certificates and learning records. Evidence and public verification availability are indicated per record.</p></div><a className={styles.profileLink} href={linkedin} target="_blank" rel="noreferrer">LINKEDIN <ArrowUpRight size={15}/></a></header>
   <a href="https://github.com/MUHRIS-AJ/muhris-portfolio/blob/main/docs/github-profile/hero.svg" target="_blank" rel="noreferrer" className={styles.identityBanner}><Image src="/github-profile-hero.svg" width={1200} height={360} alt="A.J. Muhris original GitHub profile banner" unoptimized/><span>GITHUB PROFILE ARTWORK <ArrowUpRight size={14}/></span></a>
-  <div className={styles.galleryGrid}>{items.map((item,i)=><motion.button key={item.title} type="button" className={styles.medal} aria-expanded={selected===i} onClick={()=>setSelected(n=>n===i?null:i)} whileHover={disabled?undefined:{y:-5,rotateY:i%2?5:-5}} transition={{duration:.25}}>
-    <div className={styles.medalIcon}><Award size={33}/></div><span className={styles.medalType}>{item.type}</span><strong>{item.title}</strong><small>{item.issuer}{item.issuedDate ? " · "+item.issuedDate : ""}</small>
-    <AnimatePresence initial={false}>{selected===i&&<motion.div className={styles.evidence} initial={disabled?false:{opacity:0,y:8}} animate={{opacity:1,y:0}} exit={disabled?{opacity:1}:{opacity:0}} transition={{duration:disabled?0:.2}}>{item.evidence}<br/>{item.skills?.length ? <>Skills: {item.skills.join(" · ")}<br/></> : null}Public verification pending.</motion.div>}</AnimatePresence>
-  </motion.button>)}</div>
-  <p className={styles.note}>Original glass medallions represent records, not official issuer badge artwork. Course completion is not an industry certification. No personal email links are published. <a href="https://github.com/MUHRIS-AJ/muhris-portfolio/blob/main/config.js" target="_blank" rel="noreferrer">Original GitHub credential records</a>.</p>
+  <div className={styles.galleryGrid}>{items.map((item,i)=><motion.article key={item.title} className={styles.medal} whileHover={disabled?undefined:{y:-5,rotateY:i%2?5:-5}} transition={{duration:.25}}>
+    <button type="button" className={styles.medalTrigger} aria-expanded={selected===i} aria-controls={"credential-details-"+i} onClick={()=>setSelected(n=>n===i?null:i)}>
+      <div className={item.art?styles.officialBadge:styles.medalIcon}>{item.art?<Image src={item.art} alt={item.title+" badge artwork"} width={128} height={128} unoptimized/>:<Award size={33}/>}</div>
+      <span className={styles.medalType}>{item.type}</span><strong>{item.title}</strong><small>{item.issuer}{item.issuedDate ? " · "+item.issuedDate : ""}</small>
+      {item.expires && <small>Expires 29 Dec 2026 · check issuer for current status</small>}
+      <span className={styles.expandHint}>{selected===i?"Hide details":"View details"}</span>
+    </button>
+    <AnimatePresence initial={false}>{selected===i&&<motion.div id={"credential-details-"+i} className={styles.evidence} initial={disabled?false:{opacity:0,y:8}} animate={{opacity:1,y:0}} exit={disabled?{opacity:1}:{opacity:0}} transition={{duration:disabled?0:.2}}>{item.evidence}<br/>{item.skills?.length ? <>Skills: {item.skills.join(" · ")}<br/></> : null}{item.verify?"Public personal badge link available.":"Personal public verification URL not available."}</motion.div>}</AnimatePresence>
+    {(item.verify||item.info)&&<div className={styles.credentialLinks}>{item.verify&&<a href={item.verify} target="_blank" rel="noreferrer">Verify badge <ArrowUpRight size={13}/></a>}{item.info&&<a href={item.info} target="_blank" rel="noreferrer">Issuer details <ArrowUpRight size={13}/></a>}</div>}
+  </motion.article>)}</div>
+  <p className={styles.note}>Credly artwork is provided by the original issuers. Other glass medallions are visual placeholders, not official badges. Course completion is not an industry certification. No personal email links are published. <a href="https://github.com/MUHRIS-AJ/muhris-portfolio/blob/main/config.js" target="_blank" rel="noreferrer">Original GitHub credential records</a>.</p>
+ </section>
+}
+
+export function MembershipHall(){
+ const slots=[
+ {title:"CSSA",detail:"Professional or student association"},
+ {title:"IEEE",detail:"Future student membership"},
+ {title:"Microsoft Student Ambassador",detail:"Future ambassador application"},
+ {title:"Additional professional body",detail:"Reserved for future membership"},
+ {title:"Student ambassador programme",detail:"Reserved for future recognition"},
+ {title:"Future affiliation",detail:"Reserved for a new organisation"}
+ ];
+ return <section id="memberships" className={styles.gallery} aria-label="Future memberships">
+  <header className={styles.heading}><div><p className={styles.eyebrow}>NEXT CHAPTER / RESERVED SLOTS</p><h2>HALL OF <em>MEMBERSHIPS.</em></h2><p>Future goals only. No membership or ambassador appointment is claimed here.</p></div><span className={styles.sceneLabel}>NOT YET HELD</span></header>
+  <div className={styles.galleryGrid}>{slots.map(slot=><article key={slot.title} className={styles.reservedSlot}><div className={styles.emptyPedestal}><LockKeyhole size={24}/></div><span className={styles.medalType}>RESERVED / NOT YET HELD</span><strong>{slot.title}</strong><small>{slot.detail}</small></article>)}</div>
  </section>
 }
