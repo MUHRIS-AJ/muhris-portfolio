@@ -48,3 +48,5 @@
 @media(max-width:760px){.section,.gallery{margin-bottom:65px}.stage{border-radius:18px;aspect-ratio:4/5;min-height:300px}.heading{align-items:flex-start;flex-direction:column}.sceneLabel{text-align:left}.galleryGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.cameraPicker{flex-wrap:wrap}.controls button{padding:10px}.jelly{width:36%;left:32%;top:31%}.medal{padding:14px;min-height:200px}.medal strong{font-size:14px}}
 @media(max-width:390px){.galleryGrid{grid-template-columns:1fr}.medal{min-height:0}}
 @media(prefers-reduced-motion:reduce){.jelly,.shardOne,.shardTwo{animation:none!important}.sky{transition:none}}
+
+.identityBanner{display:block;position:relative;margin:0 0 24px;border-radius:20px;overflow:hidden;border:1px solid #ffffff30;background:#141421;box-shadow:0 12px 40px #0005}.identityBanner img{display:block;width:100%;height:auto}.identityBanner span{display:flex;align-items:center;justify-content:flex-end;gap:8px;padding:10px 16px;font-size:10px;font-weight:800;letter-spacing:.12em;color:#d6e8e2}.identityBanner:focus-visible{outline:3px solid #afffe0;outline-offset:3px}.note a{color:#c1f9df;text-decoration:underline}
