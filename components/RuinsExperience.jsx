@@ -1,5 +1,6 @@
 "use client";
 import {useRef,useState} from "react";
+import Image from "next/image";
 import {motion, useScroll,useTransform,useSpring,AnimatePresence} from "framer-motion";
 import {Orbit,ArrowUpRight,Award,ChevronLeft,ChevronRight,Move,ZoomIn,ZoomOut,RotateCcw} from "lucide-react";
 import styles from "./RuinsExperience.module.css";
@@ -75,15 +76,74 @@ export function RuinsExperience({disabled=false}){
  </section>;
 }
 
+const archivedCredentialDetails = {
+  "Data Analytics": {
+    "issuedDate": "Dec 2025",
+    "skills": [
+      "Data Analysis",
+      "Python (Pandas, NumPy)",
+      "Microsoft Excel",
+      "Power BI"
+    ]
+  },
+  "Excel Dynamic Dashboards": {
+    "issuedDate": "Dec 2025",
+    "skills": [
+      "Microsoft Excel",
+      "Power BI",
+      "Power Query",
+      "Dashboards"
+    ]
+  },
+  "Python Fundamentals": {
+    "issuedDate": "Oct 2025",
+    "skills": [
+      "Python",
+      "NumPy",
+      "pandas",
+      "MySQLi"
+    ]
+  },
+  "Algorithms & Flowcharts": {
+    "issuedDate": "Oct 2025",
+    "skills": [
+      "Program Development",
+      "Computational Thinking",
+      "Algorithms",
+      "Computer Science"
+    ]
+  },
+  "Tools for Data Science": {
+    "issuedDate": "Sep 2025",
+    "skills": [
+      "Data Science",
+      "Python",
+      "Github",
+      "IBM Cloud",
+      "Jupyter"
+    ]
+  },
+  "The Data Science Profession": {
+    "issuedDate": "Apr 2025",
+    "skills": [
+      "Applied ML",
+      "Data Science",
+      "ML Algorithms",
+      "Python"
+    ]
+  }
+};
+
 export function CredentialGallery({original=[],disabled=false,linkedin}){
  const [selected,setSelected]=useState(null);
- const items=[...extraCredentials,...original.map(c=>({...c,type:"Learning record",evidence:"Previously listed · issuer proof pending"}))];
+ const items=[...extraCredentials,...original.map(c=>({...c,...archivedCredentialDetails[c.title],type:"Learning record",evidence:"Listed in original GitHub portfolio · issuer proof pending"}))];
  return <section id="achievement-gallery" className={styles.gallery} data-still={disabled?"true":"false"} aria-label="Hall of achievements">
   <header className={styles.heading}><div><p className={styles.eyebrow}>ARCHIVE / {items.length} RECORDS</p><h2>HALL OF <em>ACHIEVEMENTS.</em></h2><p>Explore credentials and learning records. Public verification links are not yet available for these entries.</p></div><a className={styles.profileLink} href={linkedin} target="_blank" rel="noreferrer">LINKEDIN <ArrowUpRight size={15}/></a></header>
+  <a href="https://github.com/MUHRIS-AJ/muhris-portfolio/blob/main/docs/github-profile/hero.svg" target="_blank" rel="noreferrer" className={styles.identityBanner}><Image src="/github-profile-hero.svg" width={1200} height={360} alt="A.J. Muhris original GitHub profile banner" unoptimized/><span>GITHUB PROFILE ARTWORK <ArrowUpRight size={14}/></span></a>
   <div className={styles.galleryGrid}>{items.map((item,i)=><motion.button key={item.title} type="button" className={styles.medal} aria-expanded={selected===i} onClick={()=>setSelected(n=>n===i?null:i)} whileHover={disabled?undefined:{y:-5,rotateY:i%2?5:-5}} transition={{duration:.25}}>
-    <div className={styles.medalIcon}><Award size={33}/></div><span className={styles.medalType}>{item.type}</span><strong>{item.title}</strong><small>{item.issuer}</small>
-    <AnimatePresence initial={false}>{selected===i&&<motion.div className={styles.evidence} initial={disabled?false:{opacity:0,y:8}} animate={{opacity:1,y:0}} exit={disabled?{opacity:1}:{opacity:0}} transition={{duration:disabled?0:.2}}>{item.evidence}<br/>Public verification pending.</motion.div>}</AnimatePresence>
+    <div className={styles.medalIcon}><Award size={33}/></div><span className={styles.medalType}>{item.type}</span><strong>{item.title}</strong><small>{item.issuer}{item.issuedDate ? " · "+item.issuedDate : ""}</small>
+    <AnimatePresence initial={false}>{selected===i&&<motion.div className={styles.evidence} initial={disabled?false:{opacity:0,y:8}} animate={{opacity:1,y:0}} exit={disabled?{opacity:1}:{opacity:0}} transition={{duration:disabled?0:.2}}>{item.evidence}<br/>{item.skills?.length ? <>Skills: {item.skills.join(" · ")}<br/></> : null}Public verification pending.</motion.div>}</AnimatePresence>
   </motion.button>)}</div>
-  <p className={styles.note}>Original glass medallions represent records, not official issuer badge artwork. Course completion is not an industry certification. No personal email links are published.</p>
+  <p className={styles.note}>Original glass medallions represent records, not official issuer badge artwork. Course completion is not an industry certification. No personal email links are published. <a href="https://github.com/MUHRIS-AJ/muhris-portfolio/blob/main/config.js" target="_blank" rel="noreferrer">Original GitHub credential records</a>.</p>
  </section>
 }
