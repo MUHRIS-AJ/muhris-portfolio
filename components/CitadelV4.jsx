@@ -1,0 +1,96 @@
+"use client";
+import {useEffect,useRef,useState,Component} from "react";
+import dynamic from "next/dynamic";
+import Image from "next/image";
+import {motion,AnimatePresence,useReducedMotion,useScroll,useTransform,useSpring} from "framer-motion";
+import {ArrowUpRight,ArrowRight,ArrowDown,Github,Linkedin,Menu,X,Award,LockKeyhole,Orbit,Pause,Play,ChevronLeft,ChevronRight,GraduationCap,Code2,BrainCircuit,Database,ShieldCheck,ExternalLink} from "lucide-react";
+import {extraCredentials} from "./RuinsExperience";
+import {config} from "@/config";
+import s from "./CitadelV4.module.css";
+
+const research = [
+  { name: "RESEARCHGUARD", tag: "CITATION VERIFICATION", description: "Crossref-backed research metadata checks with source-linked DOI shortlists.", stack: "Crossref · FastMCP · Python", demo: "https://muhris-researchguard.vercel.app?service=ResearchGuard", url: "https://github.com/MUHRIS-AJ/ResearchGuard", phase: "HOSTED MVP" },
+  { name: "TENDERPILOT", tag: "PUBLIC PROCUREMENT", description: "Find EU public tender notices. Business eligibility still requires human review.", stack: "EU TED · FastMCP", demo: "https://muhris-tenderpilot-zerowaste.vercel.app?service=TenderPilot", url: "https://github.com/MUHRIS-AJ/TenderPilot-ZeroWaste", phase: "HOSTED MVP" },
+  { name: "ZEROWASTE", tag: "FOOD RESCUE DISCOVERY", description: "Discover mapped potential food-bank and community leads; partner consent is not verified.", stack: "OpenStreetMap · Overpass", demo: "https://muhris-tenderpilot-zerowaste.vercel.app?service=ZeroWaste", url: "https://github.com/MUHRIS-AJ/TenderPilot-ZeroWaste", phase: "HOSTED MVP" },
+  { name: "EARTHWATCH", tag: "EVENT INTELLIGENCE", description: "Read NASA and USGS natural-event reports. Not an official alert or forecasting tool.", stack: "NASA EONET · USGS · FastMCP", demo: "https://muhris-earthwatch.vercel.app?service=EarthWatch", url: "https://github.com/MUHRIS-AJ/EarthWatch", phase: "HOSTED MVP" },
+  { name: "GRANTSCOUT", tag: "FUNDING DISCOVERY", description: "Search US Grants.gov opportunities and surface original agency information.", stack: "Grants.gov · Python · MCP", demo: "https://muhris-grantscout-accessmap.vercel.app?service=GrantScout", url: "https://github.com/MUHRIS-AJ/GrantScout-AccessMap", phase: "HOSTED MVP" },
+  { name: "ACCESSMAP", tag: "ACCESSIBILITY DATA", description: "Inspect crowdsourced OSM wheelchair tags; on-site accessibility remains unverified.", stack: "OpenStreetMap · Overpass", demo: "https://muhris-grantscout-accessmap.vercel.app?service=AccessMap", url: "https://github.com/MUHRIS-AJ/GrantScout-AccessMap", phase: "HOSTED MVP" },
+  { name: "RECALLRADAR", tag: "PRODUCT SAFETY DATA", description: "Find public CPSC consumer product recall records and their official references.", stack: "CPSC · FastMCP", demo: "https://muhris-recallradar-tradebridge.vercel.app?service=RecallRadar", url: "https://github.com/MUHRIS-AJ/RecallRadar-TradeBridge", phase: "HOSTED MVP" },
+  { name: "TRADEBRIDGE", tag: "ECONOMIC INDICATORS", description: "Compare World Bank export and GDP indicators without speculative market forecasts.", stack: "World Bank · Python", demo: "https://muhris-recallradar-tradebridge.vercel.app?service=TradeBridge", url: "https://github.com/MUHRIS-AJ/RecallRadar-TradeBridge", phase: "HOSTED MVP" }
+]
+const githubLink="https://github.com/MUHRIS-AJ";
+const linkedIn="https://www.linkedin.com/in/muhrees-abool-jayah-975220350/";
+const nav=[["Home","top"],["About","about"],["Projects","work"],["AI Lab","agents"],["Credentials","credentials"],["Memberships","memberships"],["Gallery","gallery"],["Contact","contact"]];
+const portraits=["Professional","Campus","Editorial","Student life","Portrait study","High angle","Wide portrait"];
+const skills=["Python","C / C++","SQL","Pandas / NumPy","Machine learning","Power BI","React / Next.js","Git / GitHub","Networking","MCP workflows"];
+const affiliations=["CSSA","IEEE","Microsoft Student Ambassador","Professional body","Ambassador programme","Future affiliation"];
+const ThreeWorld=dynamic(()=>import("./CitadelWorld"),{ssr:false,loading:()=>null});
+class WorldBoundary extends Component {
+ state={failed:false};
+ static getDerivedStateFromError(){return {failed:true}}
+ render(){return this.state.failed?null:this.props.children}
+}
+function GlassButton({href,children,primary=false}){return <a className={primary?s.primary:s.glassButton} href={href} target={href.startsWith("https:")?"_blank":undefined} rel={href.startsWith("https:")?"noreferrer":undefined}>{children}</a>}
+function Heading({number,label,title,children}){return <header className={s.roomHeading}><span className={s.kicker}>{number} / {label}</span><h2>{title}</h2>{children&&<p>{children}</p>}</header>}
+function BadgeArt({item}){return item.art?<div className={s.badgeArt}><Image src={item.art} width={128} height={128} unoptimized alt={item.title+" issuer badge"}/></div>:<div className={s.badgePlaceholder}><Award size={34}/></div>}
+export default function CitadelV4({github}){
+ const reduce=useReducedMotion();const [motionOn,setMotionOn]=useState(true);const [ready,setReady]=useState(false);const [wide,setWide]=useState(false);const [menu,setMenu]=useState(false);const [portrait,setPortrait]=useState(0);const [selected,setSelected]=useState(null);const [feed,setFeed]=useState("featured");const [filter,setFilter]=useState("all");const [active,setActive]=useState("top");
+ const noMotion=!!reduce||!motionOn;const heroRef=useRef(null);
+ const {scrollYProgress}=useScroll({target:heroRef,offset:["start start","end start"]});
+ const progress=useSpring(scrollYProgress,{stiffness:100,damping:25});
+ const scale=useTransform(progress,[0,1],[1,1.18]);const y=useTransform(progress,[0,1],[0,85]);const roll=useTransform(progress,[0,1],[0,-2]);
+ useEffect(()=>{setReady(true);const q=window.matchMedia("(min-width: 850px)");const update=()=>setWide(q.matches);update();q.addEventListener("change",update);return()=>q.removeEventListener("change",update)},[]);
+ useEffect(()=>{const nodes=nav.map(([,id])=>document.getElementById(id)).filter(Boolean);const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)setActive(e.target.id)})},{rootMargin:"-20% 0px -55% 0px"});nodes.forEach(n=>observer.observe(n));return()=>observer.disconnect()},[]);
+ useEffect(()=>{if(selected===null)return;const key=e=>{if(e.key==="Escape")setSelected(null)};window.addEventListener("keydown",key);return()=>window.removeEventListener("keydown",key)},[selected]);
+ const credentialRecords=[...extraCredentials,...config.certifications.map(c=>({...c,type:"Learning record",evidence:"Previously listed in portfolio; public issuer verification pending"}))];
+ const repos=(feed==="recent"&&github.recent?.length?github.recent:github.featured)||[];
+ const category=r=>/churn|segment|machine|ai_|m23-ai|predict|fraud|evaluator/i.test(r.name+" "+r.description)?"ai":/sales|dashboard|inflation|data|analytics|scraper|market/i.test(r.name+" "+r.description)?"data":"software";
+ const filtered=repos.filter(r=>filter==="all"||category(r)===filter);
+ const reveal=noMotion?{}:{initial:{opacity:0,y:22},whileInView:{opacity:1,y:0},viewport:{once:true,amount:.12},transition:{duration:.55,ease:[.22,1,.36,1]}};
+ return <main className={s.world} data-motion={noMotion?"off":"on"} id="citadel-v4">
+  <a className={s.skip} href="#about">Skip to content</a>
+  <div className={s.ambient} aria-hidden="true"/>
+  {ready&&wide&&!noMotion&&<WorldBoundary><div className={s.webgl} aria-hidden="true"><ThreeWorld/></div></WorldBoundary>}
+  <header className={s.navWrap}><div className={s.navBar}>
+   <a className={s.brand} href="#top"><span>M</span><strong>MUHRIS <small>AI LAB</small></strong></a>
+   <nav aria-label="Main navigation" className={s.desktopNav}>{nav.map(([label,id])=><a key={id} href={"#"+id} aria-current={active===id?"location":undefined} className={active===id?s.navActive:undefined}>{label}</a>)}</nav>
+   <div className={s.navIcons}><button className={s.iconButton} type="button" aria-label={noMotion?"Enable motion":"Reduce motion"} aria-pressed={!noMotion} disabled={!!reduce} onClick={()=>setMotionOn(v=>!v)}>{noMotion?<Play size={17}/>:<Pause size={17}/>}</button><a className={s.socialIcon} href={githubLink} target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={19}/></a><a className={s.socialIcon} href={linkedIn} target="_blank" rel="noreferrer" aria-label="LinkedIn"><Linkedin size={19}/></a><button className={s.menuToggle} type="button" onClick={()=>setMenu(v=>!v)} aria-expanded={menu} aria-label={menu?"Close navigation":"Open navigation"}>{menu?<X/>:<Menu/>}</button></div>
+  </div>{menu&&<nav className={s.mobileNav} aria-label="Mobile navigation">{nav.map(([label,id])=><a key={id} href={"#"+id} onClick={()=>setMenu(false)}>{label}</a>)}</nav>}</header>
+  <section ref={heroRef} id="top" className={s.hero} aria-label="Introduction">
+   <motion.div className={s.heroArt} style={noMotion?{}:{scale,y,rotateZ:roll}}><Image src="/citadel/hero.webp" alt="" fill priority sizes="100vw" className={s.heroImage}/></motion.div>
+   <div className={s.heroShade}/><div className={s.heroContent}>
+    <motion.div {...(noMotion?{}:{initial:{opacity:0,y:22},animate:{opacity:1,y:0},transition:{duration:.8}})}><span className={s.kicker}><i/> PERSONAL PORTFOLIO / VOL. IV</span><h1>MUHRIS<span>AI LAB</span></h1><p className={s.tagline}>Build beyond the ordinary.</p><p className={s.intro}>A.J. Muhris · BICT undergraduate<br/>Applied AI, software, networks and data.</p>
+    <div className={s.actions}><GlassButton href="#work" primary>Explore projects <ArrowRight size={18}/></GlassButton><GlassButton href="#credentials">My credentials <Award size={18}/></GlassButton></div></motion.div>
+   </div>
+   <div className={s.heroFoot}><span>FICTIONAL CITADEL · AI-GENERATED ART</span><a href="#about">ENTER THE CITADEL <ArrowDown size={15}/></a></div>
+  </section>
+  <div className={s.previewRow}>
+   <div className={s.glassPanel}><div className={s.panelHead}><h2><Award size={23}/> Credential vault</h2><a href="#credentials">View all ({credentialRecords.length}) <ArrowUpRight size={14}/></a></div><div className={s.heroBadges}>{extraCredentials.filter(c=>c.art).map(item=><a key={item.title} href="#credentials" className={s.miniBadge}><BadgeArt item={item}/><strong>{item.title}</strong></a>)}</div></div>
+   <div className={s.glassPanel}><div className={s.panelHead}><h2><LockKeyhole size={23}/> Membership chamber</h2><a href="#memberships">View room <ArrowUpRight size={14}/></a></div><div className={s.heroMemberships}>{affiliations.slice(0,3).map(item=><a key={item} href="#memberships" className={s.pedestal}><LockKeyhole size={21}/><strong>{item}</strong><small>Reserved</small></a>)}</div></div>
+  </div>
+  <motion.section id="about" className={s.room} {...reveal}>
+   <Heading number="01" label="THE CITADEL" title="Knowledge. Discipline. Creation.">A professional identity built around curiosity and practical engineering.</Heading>
+   <div className={s.aboutGrid}><div className={s.portraitCard}><Image src="/citadel/portrait-1.webp" alt="Formal portrait" fill sizes="(max-width: 700px) 90vw, 380px" className={s.portraitImage}/></div><div className={s.glassPanel}><span className={s.kicker}>THE ACADEMY</span><h3>Eastern University, Sri Lanka</h3><p>Bachelor of Information and Communication Technology (BICT) · Faculty of Technology</p><p>I explore machine learning, data science, networking and software development. My work focuses on useful prototypes, reproducible research and transparent documentation.</p><div className={s.stats}><div><strong>{github.totalPublic??"—"}</strong><small>Public repositories</small></div><div><strong>{credentialRecords.length}</strong><small>Learning records</small></div><div><strong>{research.length}</strong><small>Lab prototypes</small></div></div><GlassButton href={linkedIn}>Professional profile <Linkedin size={17}/></GlassButton></div></div>
+  </motion.section>
+  <motion.section id="work" className={s.room} {...reveal}>
+   <Heading number="02" label="PROJECT ARCHIVE" title="Systems built to work.">Explore source code and project documentation. {github.live?"GitHub data is refreshed periodically.":"Showing the curated fallback while GitHub is unavailable."}</Heading>
+   <div className={s.toolbar}><div className={s.filter}>{[["all","All"],["ai","AI / ML"],["data","Data"],["software","Software"]].map(([v,l])=><button type="button" key={v} aria-pressed={filter===v} onClick={()=>setFilter(v)}>{l}</button>)}</div><button type="button" className={s.glassButton} onClick={()=>{setFeed(v=>v==="featured"?"recent":"featured");setFilter("all")}}>{feed==="featured"?"Latest from GitHub":"Featured projects"} <Github size={16}/></button></div>
+   <div className={s.projectGrid}>{filtered.map(r=><a className={s.projectCard} key={r.id??r.name} href={r.html_url} target="_blank" rel="noreferrer"><span className={s.cardIcon}>{category(r)==="ai"?<BrainCircuit/>:category(r)==="data"?<Database/>:<Code2/>}</span><h3>{r.name.replace(/^[0-9]+\.-/,"").replace(/[_-]+/g," ").trim()}</h3><p>{r.description||"Source code and project history."}</p><span className={s.cardLink}>{r.language||"Repository"} <ArrowUpRight size={16}/></span></a>)}</div>{!filtered.length&&<p>No projects match this filter.</p>}
+  </motion.section>
+  <motion.section id="agents" className={s.room} {...reveal}>
+   <Heading number="03" label="INTELLIGENCE LAB" title="Research into reality.">Eight source-grounded hosted prototypes. Rule-based tools, not autonomous LLM agents; upstream data availability may vary.</Heading>
+   <div className={s.projectGrid}>{research.map(r=><article className={s.projectCard} key={r.name}><span className={s.kicker}>{r.tag}</span><h3>{r.name}</h3><p>{r.description}</p><small>{r.stack}</small><div className={s.actions}><a href={r.demo} target="_blank" rel="noreferrer">Open demo <ArrowUpRight size={14}/></a><a href={r.url} target="_blank" rel="noreferrer">Source <Github size={14}/></a></div></article>)}</div>
+  </motion.section>
+  <motion.section id="skills" className={s.room} {...reveal}><Heading number="04" label="THE ARSENAL" title="Tools of creation.">Technologies I use and study.</Heading><div className={s.skillGrid}>{skills.map(item=><div className={s.skill} key={item}><span className={s.skillOrb}/>{item}</div>)}</div></motion.section>
+  <motion.section id="credentials" className={s.room} {...reveal}>
+   <Heading number="05" label="CREDENTIAL VAULT" title="Evidence of learning.">Official badge artwork where available. Course completions, certifications and other records are distinguished; not all have public verification links.</Heading>
+   <div className={s.credentialGrid}>{credentialRecords.map((item,i)=><article className={s.credential} key={item.title}><BadgeArt item={item}/><span className={s.kicker}>{item.type}</span><h3>{item.title}</h3><p>{item.issuer}</p>{item.issuedDate&&<small>{item.issuedDate}</small>}{item.expires&&<small>Expires 29 Dec 2026 · check issuer</small>}<button className={s.detailsButton} type="button" onClick={()=>setSelected(i)}>View record <ArrowUpRight size={14}/></button>{item.verify&&<a href={item.verify} target="_blank" rel="noreferrer">Verify personal badge <ExternalLink size={13}/></a>}</article>)}</div>
+  </motion.section>
+  <motion.section id="memberships" className={s.room} {...reveal}><Heading number="06" label="MEMBERSHIP CHAMBER" title="The next chapter.">Reserved for future affiliations. No membership or appointment is currently claimed.</Heading><div className={s.membershipGrid}>{affiliations.map((item,i)=><article className={s.membership} key={item}><div className={s.bigPedestal}><LockKeyhole size={30}/></div><span className={s.kicker}>SLOT 0{i+1}</span><h3>{item}</h3><small>Not yet held</small></article>)}</div></motion.section>
+  <motion.section id="gallery" className={s.room} {...reveal}><Heading number="07" label="PORTRAIT GALLERY" title="Perspectives.">Seven original photographs, with the cinematic hero artwork presented separately.</Heading><div className={s.galleryLayout}><div className={s.galleryMain}><AnimatePresence initial={false} mode="wait"><motion.div key={portrait} className={s.galleryImage} initial={noMotion?false:{opacity:0,scale:1.04}} animate={{opacity:1,scale:1}} exit={noMotion?{opacity:1}:{opacity:0,scale:.97}} transition={{duration:noMotion?0:.35}}><Image src={"/citadel/portrait-"+(portrait+1)+".webp"} alt={portraits[portrait]+" photograph"} fill sizes="(max-width: 700px) 95vw, 600px" className={s.galleryPhoto}/></motion.div></AnimatePresence><div className={s.galleryControls}><button type="button" aria-label="Previous portrait" onClick={()=>setPortrait(p=>(p+6)%7)}><ChevronLeft/></button><span>{portrait+1} / 7 · {portraits[portrait]}</span><button type="button" aria-label="Next portrait" onClick={()=>setPortrait(p=>(p+1)%7)}><ChevronRight/></button></div></div><div className={s.thumbnails}>{portraits.map((label,i)=><button type="button" key={label} aria-label={"Show "+label} aria-pressed={portrait===i} onClick={()=>setPortrait(i)}><Image src={"/citadel/portrait-"+(i+1)+".webp"} alt={label} fill sizes="120px" className={s.portraitImage}/></button>)}</div></div></motion.section>
+  <motion.section id="workflow" className={s.room} {...reveal}><Heading number="08" label="THE COUNCIL" title="Learn. Lead. Build.">English Club leadership, student collaboration and university development initiatives.</Heading><div className={s.glassPanel}><h3>Research → Design → Build → Verify → Ship</h3><p>My workflow prioritizes source review, reproducible code, testing and human responsibility for AI-assisted output.</p></div></motion.section>
+  <motion.section id="contact" className={s.room+" "+s.gateway} {...reveal}><Heading number="09" label="THE GATEWAY" title="Let's build what matters.">Open to learning, research collaboration and student opportunities.</Heading><div className={s.actions}><GlassButton href={linkedIn} primary>LinkedIn <Linkedin size={19}/></GlassButton><GlassButton href={githubLink}>GitHub <Github size={19}/></GlassButton></div></motion.section>
+  <footer className={s.footer}><span>© {new Date().getFullYear()} A.J. Muhris</span><span>MUHRIS AI LAB / VOL. IV</span><a href="#top">Back to top ↑</a></footer>
+  {selected!==null&&<div className={s.modalBackdrop} onClick={()=>setSelected(null)}><div className={s.modal} role="dialog" aria-modal="true" aria-label="Credential record" onClick={e=>e.stopPropagation()}><button type="button" autoFocus className={s.modalClose} onClick={()=>setSelected(null)} aria-label="Close credential"><X/></button><BadgeArt item={credentialRecords[selected]}/><h2>{credentialRecords[selected].title}</h2><p>{credentialRecords[selected].issuer}</p><p>{credentialRecords[selected].evidence}</p>{credentialRecords[selected].skills&&<p>Skills: {credentialRecords[selected].skills.join(" · ")}</p>}{credentialRecords[selected].verify?<GlassButton href={credentialRecords[selected].verify}>Verify badge <ArrowUpRight size={15}/></GlassButton>:<p>Personal public verification link is not available.</p>}{credentialRecords[selected].info&&<GlassButton href={credentialRecords[selected].info}>Issuer details <ArrowUpRight size={15}/></GlassButton>}</div></div>}
+ </main>
+}
