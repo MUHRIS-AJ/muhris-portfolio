@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { SceneReveal, TiltProject, MagneticLink, MorphBackdrop, ScrollProgress } from "./MotionFX";
 import styles from "../app/(home)/cinematic.module.css";
-import { RuinsExperience, CredentialGallery, extraCredentials } from "./RuinsExperience";
+import { RuinsExperience, CredentialGallery, MembershipHall, extraCredentials } from "./RuinsExperience";
 
 const profile = {
   github: "https://github.com/MUHRIS-AJ",
@@ -229,6 +229,7 @@ export default function CinematicPortfolio({ github }) {
       </SceneReveal>
 
       <CredentialGallery original={certificates} disabled={noMotion} linkedin={profile.linkedin} />
+      <MembershipHall />
 
       <SceneReveal as="section" className={styles.section} id="workflow" disabled={noMotion}>
         <SectionTitle kicker="04 / THINK · BUILD · VERIFY" title="HUMAN +" accent="AI." description="I collaborate with AI for research, architecture, implementation and testing. I retain responsibility for reviewing the output and real-world results." number="04—04"/>
