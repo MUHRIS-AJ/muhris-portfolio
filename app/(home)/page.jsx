@@ -1,4 +1,4 @@
-import CinematicPortfolio from "@/components/CinematicPortfolio";
+import CitadelV4 from "@/components/CitadelV4";
 import { getGitHubData } from "@/lib/githubPortfolio";
 export const revalidate = 900;
 export const metadata = {
@@ -7,5 +7,5 @@ export const metadata = {
 };
 export default async function Home() {
   const github = await getGitHubData();
-  return <CinematicPortfolio github={github} />;
+  return <CitadelV4 github={github} />;
 }
