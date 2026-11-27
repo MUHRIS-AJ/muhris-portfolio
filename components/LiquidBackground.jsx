@@ -1,4 +1,5 @@
 "use client";
+import { usePathname } from "next/navigation";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Sphere, MeshDistortMaterial, Float } from "@react-three/drei";
 import { cn } from "@/lib/utils";
@@ -46,6 +47,7 @@ function LiquidSphere() {
 }
 
 export default function LiquidBackground() {
+    const pathname=usePathname();
     const { theme } = useTheme();
     const [mounted, setMounted] = useState(false);
 
